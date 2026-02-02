@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     height: 420,
     borderRadius: 40,
     overflow: 'hidden',
-    // Removed elevation and black background to stop the flickering
+    
   },
   image: {
     flex: 1,

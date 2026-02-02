@@ -13,7 +13,6 @@ const BookingDetailsScreen = ({ navigation }) => {
     const [loading, setLoading] = useState(false);
     const [cardDetails, setCardDetails] = useState(null);
 
-    // Traveler State
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -30,7 +29,6 @@ const BookingDetailsScreen = ({ navigation }) => {
 
         setLoading(true);
         try {
-            // 1. Create PaymentIntent on your server
             const response = await fetch(`${IP_ADDRESS}:3000/create-payment-intent`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -46,7 +44,6 @@ const BookingDetailsScreen = ({ navigation }) => {
 
             const clientSecret = data.clientSecret
 
-            // 2. Confirm Payment using Elements (CardField)
             const { paymentIntent, error } = await confirmPayment(clientSecret, {
                 paymentMethodType: 'Card',
                 billingDetails: {
