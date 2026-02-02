@@ -6,7 +6,7 @@ import {
 import { CardField, useConfirmPayment } from '@stripe/stripe-react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Colors, Spacing, Fonts } from '../styles/tripTheme';
-import { IP_ADDRESS } from '@env';
+import { API_URL } from '@env';
 
 const BookingDetailsScreen = ({ navigation }) => {
     const { confirmPayment } = useConfirmPayment();
@@ -29,7 +29,7 @@ const BookingDetailsScreen = ({ navigation }) => {
 
         setLoading(true);
         try {
-            const response = await fetch(`${IP_ADDRESS}:3000/create-payment-intent`, {
+            const response = await fetch(`${API_URL}/create-payment-intent`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ amount: 65900, currency: 'usd' }),
@@ -86,12 +86,14 @@ const BookingDetailsScreen = ({ navigation }) => {
                     <TextInput
                         style={styles.input}
                         placeholder="Full Name"
+                        placeholderTextColor={Colors.textSecondary}
                         value={form.name}
                         onChangeText={(t) => setForm({ ...form, name: t })}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="Email Address"
+                        placeholderTextColor={Colors.textSecondary}
                         keyboardType="email-address"
                         value={form.email}
                         onChangeText={(t) => setForm({ ...form, email: t })}
@@ -99,6 +101,7 @@ const BookingDetailsScreen = ({ navigation }) => {
                     <TextInput
                         style={styles.input}
                         placeholder="Phone Number"
+                        placeholderTextColor={Colors.textSecondary}
                         keyboardType="phone-pad"
                         value={form.phone}
                         onChangeText={(t) => setForm({ ...form, phone: t })}
