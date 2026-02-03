@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "549390113266",
+    "project_id": "tripglide-fc93f",
+    "storage_bucket": "tripglide-fc93f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549390113266:android:14c41c7175a5eb8c40336b",
+        "android_client_info": {
+          "package_name": "com.yourname.tripglide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549390113266-ec940h64ej1i7j4adqdrav7cjbib4u24.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yourname.tripglide",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "549390113266-1mdktbnsqcjnga0b55gak1agq4lq2q6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVxCKCB_ZTL1DCDuz-jbRbF8bvZShFhb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549390113266-1mdktbnsqcjnga0b55gak1agq4lq2q6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

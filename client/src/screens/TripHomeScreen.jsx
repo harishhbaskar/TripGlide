@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TextInput ,Image} from 'react-native';
+import React , {useState , useEffect}from 'react';
+import { View, Text, ScrollView, StyleSheet, TextInput, Image ,TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Feather';
 import { globalStyles } from '../styles/globalStyles';
@@ -7,28 +7,49 @@ import { Colors, Spacing, Fonts } from '../styles/tripTheme';
 import CategoryTabs from '../components/CategoryTabs';
 import StackCarousel from '../components/StackCarousel';
 import HeroCard from '../components/HeroCard';
+import auth from '@react-native-firebase/auth';
 
 const DATA = [
-  { id: '1', city: 'Rio de Janeiro', country: 'Brazil', rating: '5.0', reviews: '143', image: require('../assets/images/mountain.jpg') },
-  { id: '2', city: 'Tokyo', country: 'Japan', rating: '4.9', reviews: '210', image: require('../assets/images/sunset.jpg') },
-  { id: '3', city: 'Paris', country: 'France', rating: '4.8', reviews: '98', image: require('../assets/images/airport.jpg') },
+    { id: '1', city: 'Rio de Janeiro', country: 'Brazil', rating: '5.0', reviews: '143', image: require('../assets/images/mountain.jpg') },
+    { id: '2', city: 'Tokyo', country: 'Japan', rating: '4.9', reviews: '210', image: require('../assets/images/sunset.jpg') },
+    { id: '3', city: 'Paris', country: 'France', rating: '4.8', reviews: '98', image: require('../assets/images/airport.jpg') },
 ];
 
 const TripHomeScreen = () => {
     const renderHeroCard = (item) => <HeroCard item={item} />;
-    
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged((user) => {
+            setUser(user);
+        });
+        return subscriber; 
+    }, []);
+
+    const handleLogout = async () => {
+    try {
+        await auth().signOut();
+    } catch (error) {
+        Alert.alert("Error", "Failed to log out");
+    }
+};
+
+
     return (
         <SafeAreaView style={globalStyles.safeArea}>
             <ScrollView contentContainerStyle={[globalStyles.container, { paddingBottom: 100 }]}>
                 <View style={styles.header}>
                     <View>
-                        <Text style={styles.welcomeText}>Hello, Vanessa</Text>
+                        <Text style={styles.welcomeText}>Welcome, {user?.displayName ?? 'Adventurer'}!</Text>
                         <Text style={styles.subText}>Welcome to TripGlide</Text>
                     </View>
                     <Image
                         source={require('../assets/images/avatar.webp')}
                         style={styles.avatar}
                     />
+                    <TouchableOpacity onPress={handleLogout} style={styles.logoutBtn}>
+                        <Icon name="log-out" size={22} />                    
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.searchBox}>
@@ -81,7 +102,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.white,
         paddingHorizontal: 20,
-        height: 60, 
+        height: 60,
         borderRadius: 35,
         marginTop: Spacing.l,
         marginHorizontal: Spacing.m,
@@ -91,13 +112,13 @@ const styles = StyleSheet.create({
     filterIcon: { backgroundColor: Colors.black, padding: 10, borderRadius: 20 },
 
     sectionTitle: {
-    fontSize: 24,
-    fontFamily: Fonts.bold,
-    textAlign: 'left',
-    marginTop: Spacing.l,
-    marginLeft: Spacing.m,
-    color: Colors.textPrimary,
-},
+        fontSize: 24,
+        fontFamily: Fonts.bold,
+        textAlign: 'left',
+        marginTop: Spacing.l,
+        marginLeft: Spacing.m,
+        color: Colors.textPrimary,
+    },
 
     navBar: {
         position: 'absolute',
