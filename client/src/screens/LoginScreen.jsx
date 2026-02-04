@@ -7,6 +7,7 @@ import { MailIcon, ArrowLeftIcon } from "../components/common/Icons";
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken, Settings } from 'react-native-fbsdk-next';
+import {WEB_CLIENT_ID} from '@env'
 
 const LoginScreen = ({ navigation }) => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -94,7 +95,7 @@ const LoginScreen = ({ navigation }) => {
 
         // Configure Google
         GoogleSignin.configure({
-            webClientId: '549390113266-1mdktbnsqcjnga0b55gak1agq4lq2q6s.apps.googleusercontent.com',
+            webClientId: WEB_CLIENT_ID,
             offlineAccess: true,
         });
     }, []);
